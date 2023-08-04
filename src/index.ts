@@ -14,23 +14,37 @@ import frames6 from "./frames/frames6.json";
 import frames7 from "./frames/frames7.json";
 
 /***************************************************************************/
-
-interface Frame {
-  // center
-  x1: number;
-  y1: number;
-  // top
-  x2: number;
-  y2: number;
-  // bottom
-  x3: number;
-  y3: number;
-}
+import {
+  startWithClosedFrame,
+  OPEN_THRESHOLD,
+  CLOSED_THRESHOLD,
+} from "./helper";
+import { Frame } from "./IFrame";
 
 const calculateOpenings = (frames: Frame[]): number => {
-  const openings = 0;
+  let openings = 0;
+  let isOpen = false;
 
-  // Write your algorithm
+  // Update "frames" variable so that the dataset begins
+  // when the scissors are closed
+  const newFrames = startWithClosedFrame(frames, CLOSED_THRESHOLD);
+
+  // Loop through the frames
+  for (const frame of newFrames) {
+    const { y2 } = frame;
+
+    // If the scissors are open, set isOpen to true
+    if (y2 > OPEN_THRESHOLD && !isOpen) {
+      isOpen = true;
+    }
+
+    // If the scissors are closed and isOpen is true,
+    // increment the openings counter and set isOpen to false
+    if (y2 < CLOSED_THRESHOLD && isOpen) {
+      openings++;
+      isOpen = false;
+    }
+  }
 
   console.log(`**** Openings: ${openings} ****`);
   return openings;

@@ -1,20 +1,13 @@
-// Define the closed and open thresholds
-const CLOSED_THRESHOLD = 0.2;
-const OPEN_THRESHOLD = 0.2;
+import { Frame } from "./IFrame";
 
-interface Frame {
-  // center
-  x1: number;
-  y1: number;
-  // top
-  x2: number;
-  y2: number;
-  // bottom
-  x3: number;
-  y3: number;
-}
+// Since frame values are between 0 and 1, let's use 0.1 as the threshold
+export const CLOSED_THRESHOLD = 0.1;
+export const OPEN_THRESHOLD = 0.1;
 
-const startWithClosedFrame = (frames: Frame[], threshold: number) => {
+export const startWithClosedFrame = (
+  frames: Frame[],
+  threshold: number
+): Frame[] => {
   for (const [index, frame] of frames.entries()) {
     const { y2 } = frame;
     // Here we only compare the y2 value, assuming the scissors
