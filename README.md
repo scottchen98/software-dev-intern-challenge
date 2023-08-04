@@ -28,5 +28,10 @@ Besides these examples, there are a lot of other cases how the data could be col
 ![zoom](https://i.imgur.com/bqvBXr6.png)
 
 1. What would be the other different orientations/cases that are possible?
+   **a. If the entire scissor is shifted within the frame, the coordinates of all the blades would change accordingly.**
+   **b. Movements of multiple scissors could overlap in the frame, making it challenging to track individual openings and closings.**
 2. How would you update your algorithm (if you need to) for these new cases in (1)
+   **a. If the scissor is shifted, apply the identical translation vector to the blade coordinates to bring them into a common reference frame.**
+   **b. If there are multiple scissors, it would require scissor tracking and identification techniques to distinguish between different scissors. Each scissor's state changes should be tracked separately.**
 3. For testing purposes, if you had to generate frames data, how would you go about it?
+4. **I would use graphics libraries such as OpenGL to create scissor movements and capture frame data. This frame simulation approach gives you precise control over the scissor's behavior.**
